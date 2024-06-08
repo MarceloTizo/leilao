@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0.x' 
+        dotnet-version: '8.0.x'
 
     - name: Restore dependencies
       run: dotnet restore ./AuctionAPI/AuctionAPI.csproj
@@ -29,6 +29,9 @@ jobs:
 
     - name: Publish
       run: dotnet publish --configuration Release --output ./output ./AuctionAPI/AuctionAPI.csproj
+
+    - name: List output files
+      run: ls -la ./output
 
   deploy:
     runs-on: ubuntu-latest
