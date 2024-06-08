@@ -16,10 +16,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0.x' # Certifique-se de que a versão está correta
+        dotnet-version: '8.0.x' 
 
     - name: Navigate to project directory
-      run: cd path/to/your/project # Altere para o caminho do seu diretório de projeto
+      run: cd ./AuctionAPI
 
     - name: Restore dependencies
       run: dotnet restore
@@ -44,15 +44,14 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0.x' # Certifique-se de que a versão está correta
+        dotnet-version: '8.0.x'
 
     - name: Navigate to project directory
-      run: cd path/to/your/project # Altere para o caminho do seu diretório de projeto
-
+      run: cd ./AuctionAPI
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'YOUR_APP_NAME' # Nome do aplicativo no Azure
+        app-name: 'leilaoDeItens' 
         slot-name: 'production'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: ./output
