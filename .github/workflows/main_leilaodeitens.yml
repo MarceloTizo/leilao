@@ -11,7 +11,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -19,17 +19,14 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
-      - name: Restore dependencies
-        run: dotnet restore ./AuctionAPI.csproj
-
       - name: Build with dotnet
-        run: dotnet build ./AuctionAPI.csproj --configuration Release
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ./AuctionAPI.csproj -c Release -o myapp
+        run: dotnet publish -c Release -o myapp
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: .net-app
           path: myapp
@@ -45,19 +42,20 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: .net-app
 
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: Deploy to Azure Web App
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'leilaoItens'
-          slot-name: 'Production'
+          slot-name: 'production'
           package: myapp
