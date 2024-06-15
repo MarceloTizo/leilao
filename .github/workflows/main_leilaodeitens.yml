@@ -26,13 +26,13 @@ jobs:
         run: dotnet build ./AuctionAPI.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ./AuctionAPI.csproj -c Release -o ${{ github.workspace }}/myapp
+        run: dotnet publish ./AuctionAPI.csproj -c Release -o myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{ github.workspace }}/myapp
+          path: myapp
 
   deploy:
     runs-on: windows-latest
@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'leilaoItens'
           slot-name: 'Production'
-          package: ${{ github.workspace }}/myapp
+          package: myapp
