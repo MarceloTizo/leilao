@@ -23,10 +23,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build AuctionAPI/AuctionAPI.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish AuctionAPI/AuctionAPI.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -62,5 +62,4 @@ jobs:
         with:
           app-name: 'leilaoItens'
           slot-name: 'Production'
-          package: .
-          
+          package: ${{env.DOTNET_ROOT}}/myapp
