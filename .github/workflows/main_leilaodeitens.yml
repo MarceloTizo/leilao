@@ -1,60 +1,63 @@
-name: Build and Deploy to Azure
+name: Build and deploy ASP.Net Core app to Azure Web App - leilaoItens
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '8.0.x'
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.x'
+          include-prerelease: true
 
-    - name: Restore dependencies
-      run: dotnet restore ./AuctionAPI/AuctionAPI.csproj
+      - name: Restore dependencies
+        run: dotnet restore ./AuctionAPI.csproj
 
-    - name: Build
-      run: dotnet build --configuration Release ./AuctionAPI/AuctionAPI.csproj
+      - name: Build with dotnet
+        run: dotnet build ./AuctionAPI.csproj --configuration Release
 
-    - name: Run tests
-      run: dotnet test --no-build --verbosity normal --configuration Release ./AuctionAPI/AuctionAPI.csproj
+      - name: dotnet publish
+        run: dotnet publish ./AuctionAPI.csproj -c Release -o myapp
 
-    - name: Publish
-      run: dotnet publish --configuration Release --output ./output ./AuctionAPI/AuctionAPI.csproj
-
-    - name: List output files
-      run: ls -la ./output
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: myapp
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '8.0.x'
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'leilaoDEitens'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ./output
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'leilaoItens'
+          slot-name: 'Production'
+          package: myapp

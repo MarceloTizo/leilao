@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy ASP.Net Core app to Azure Web App - leilaoItens
 
 on:
@@ -22,17 +19,20 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
+      - name: Restore dependencies
+        run: dotnet restore ./AuctionAPI.csproj
+
       - name: Build with dotnet
-        run: dotnet build AuctionAPI/AuctionAPI.csproj --configuration Release
+        run: dotnet build ./AuctionAPI.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish AuctionAPI/AuctionAPI.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish ./AuctionAPI.csproj -c Release -o myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ./myapp
 
   deploy:
     runs-on: windows-latest
@@ -41,20 +41,18 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0AB05028849C47E68B66D1D82368EC8C }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D09BCD6C5602437FAD73D372AABDFD9C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_47A1696754A94DF2866D1E19708DD6BA }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -62,4 +60,4 @@ jobs:
         with:
           app-name: 'leilaoItens'
           slot-name: 'Production'
-          package: ${{env.DOTNET_ROOT}}/myapp
+          package: .
