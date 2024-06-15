@@ -19,14 +19,15 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configurar o pipeline de requisições HTTP
-
-// Mover a configuração do Swagger para fora do bloco de desenvolvimento
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auction API V1");
-    c.RoutePrefix = string.Empty; 
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auction API V1");
+        c.RoutePrefix = string.Empty; // Isso faz com que o Swagger seja servido na raiz do site
+    });
+}
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
