@@ -18,10 +18,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configurar o pipeline de requisições HT
-    app.UseSwagger();
-    app.UseSwaggerUI();
+// Configurar o pipeline de requisições HTTP
 
+// Mover a configuração do Swagger para fora do bloco de desenvolvimento
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auction API V1");
+    c.RoutePrefix = string.Empty; // Defina o Swagger UI como a página inicial
+});
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
