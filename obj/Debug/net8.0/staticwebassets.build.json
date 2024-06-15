@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KIjI13reTTJ9g1OkhGynFLtciyTl3fRVyfxCb8PeVlo=",
+  "Hash": "q+O4QiqThlaMyk4OWkI9XQttnIAzHDfK6+AXWoq5ZpA=",
   "Source": "AuctionAPI",
   "BasePath": "_content/AuctionAPI",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "AuctionAPI\\wwwroot",
       "Source": "AuctionAPI",
-      "ContentRoot": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI\\wwwroot\\",
+      "ContentRoot": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\wwwroot\\",
       "BasePath": "_content/AuctionAPI",
       "Pattern": "**"
     }

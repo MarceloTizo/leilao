@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7FfiiqSD4xq9PqlipOcaV+EEgGOftVMW4rdO7iEFcoCXusiFfe/5lIDOJJCu7BzahBeOK5hZ124qUa12LX3DcQ==",
+  "dgSpecHash": "ZTETha73l37l4OH3zro/crWsjnIzlmpBwdXNav4RazMlx3lyACxzFTbgGAyRfFG+qyUOkcR4i66XeCSaD8B0uw==",
   "success": true,
-  "projectFilePath": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI\\AuctionAPI.csproj",
+  "projectFilePath": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marce\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.3\\microsoft.aspnetcore.openapi.8.0.3.nupkg.sha512",
     "C:\\Users\\marce\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.6\\microsoft.entityframeworkcore.8.0.6.nupkg.sha512",

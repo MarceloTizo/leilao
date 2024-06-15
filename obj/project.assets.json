@@ -1227,11 +1227,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI\\AuctionAPI.csproj",
+      "projectUniqueName": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI.csproj",
       "projectName": "AuctionAPI",
-      "projectPath": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI\\AuctionAPI.csproj",
+      "projectPath": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI.csproj",
       "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
-      "outputPath": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\AuctionAPI\\obj\\",
+      "outputPath": "D:\\FACULDADE\\2024\\TECNICAS_AVANCADAS_DE_CONSTRUCAO_DE_SOFTWARE_HIGOR\\provaN3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marce\\AppData\\Roaming\\NuGet\\NuGet.Config"
